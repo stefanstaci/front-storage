@@ -1,0 +1,132 @@
+.file {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  width: 100%;
+  height: 100%;
+}
+.actor-image {
+  height: 200px;
+  width: 150px;
+  padding: 20px;
+}
+
+.actor-container {
+  margin-top: 20px;
+  height: 70%;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* Modificat la 3 coloane */
+  gap: 1rem;
+  width: 100%;
+}
+
+.file-item {
+  text-align: center;
+}
+
+.movie-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.concrete-movie {
+  margin-bottom: 0.1rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  padding-left: 20%;
+  align-items: center;
+}
+
+.link {
+  margin-bottom: 0.5rem;
+  width: 70%;
+  height: 75%;
+}
+
+.movie-image {
+  width: 50%;
+  height: 70%;
+  transition: transform 1s;
+}
+
+.search-bar {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.title {
+  margin-bottom: 0.5rem;
+  margin-top: 2rem;
+  font-size: 2rem;
+  line-height: 1.75rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.actor-image:hover {
+  transform: scale(1.05);
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: #ADD8E6;
+  border-radius: 0.25rem;
+  border-width: 1px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  height: 50px; /* Înălțimea redusă a barei de navigare */
+  padding: 10px 20px;
+  background-color: #ADD8E6; /* culoarea de fundal a meniului de navigare */
+  color: black; /* culoarea textului */
+}
+
+.navbar-left {
+  flex: 1; /* face ca elementul să ocupe spațiul disponibil în stânga */
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.delete-button {
+  margin-bottom: 90%;
+  padding: 0.5rem 0.7rem;
+  border-radius: 9999px;
+  color: white;
+  background-color: red;
+  cursor: pointer;
+}
+
+.personal-cabinet {
+  margin-left: 20px; /* spațiere între "cabinet personal" și celelalte elemente */
+  color: black; /* culoarea textului pentru link */
+  text-decoration: none; /* eliminarea sublinierii link-ului */
+}
+
+.personal-cabinet:hover {
+  text-decoration: underline; /* sublinierea link-ului la hover */
+}

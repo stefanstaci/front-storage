@@ -1,0 +1,46 @@
+<app-global-error></app-global-error>
+
+<div>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <h1 class="title">{{ title }}</h1>
+    </div>
+    <div class="navbar-right">
+      <a href="#" class="personal-cabinet">Cabinet Personal</a>
+    </div>
+  </nav>
+</div>
+
+<div>
+  <p *ngIf="loading" [ngStyle]="{textAlign: 'center'}">loading...</p>
+
+  <input
+    type="text"
+    class="search-bar"
+    placeholder="Search file..."
+    [(ngModel)]="term"
+  >
+</div>
+
+<div *ngIf="files$ | async as files" class="file">
+  <div class="container">
+    <div *ngFor="let storageFile of files">
+      <div class="actor-container">
+        <a [routerLink]="['/', storageFile.filename]" class="link">
+          <img *ngIf="isImage(storageFile.filename)" [src]="getImageUrl(storageFile.filename)" alt="File Image" class="actor-image">
+        </a>
+        <button (click)="deleteFile(storageFile.filename)" class="delete-button">-</button>
+      </div>
+      <h3 class="concrete-movie">{{storageFile.filename}}</h3>
+    </div>
+  </div>
+</div>
+
+<div>
+  <app-modal *ngIf="(modalService.isVisible$ | async) && (modalType === 'add-file')" title="Add File">
+    <app-file-upload-form></app-file-upload-form>
+  </app-modal>
+  <button (click)="openModal('add-file')" class="button">add file</button>
+</div>
+
+

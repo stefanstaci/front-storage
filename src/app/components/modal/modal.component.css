@@ -1,0 +1,26 @@
+.modal-background {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.modal {
+  width: 70%;
+  position: absolute;
+  top: 16px;
+  border-radius: 0.25rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.125rem;
+}
+
