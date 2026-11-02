@@ -1,0 +1,32 @@
+<h2 mat-dialog-title  class="title">Verificare cod</h2>
+
+<mat-dialog-content>
+  <p>Introduceți codul de 6 cifre primit pe email.</p>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Cod OTP</mat-label>
+    <input
+      matInput
+      type="text"
+      maxlength="6"
+      [(ngModel)]="otp"
+      autocomplete="one-time-code"
+    />
+  </mat-form-field>
+
+  <p class="error" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Anulează</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onConfirm()"
+    [disabled]="otp.length !== 6"
+  >
+    Confirmă
+  </button>
+</mat-dialog-actions>

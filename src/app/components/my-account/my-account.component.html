@@ -1,0 +1,115 @@
+<app-global-error></app-global-error>
+<navbar></navbar>
+
+<div class="cabinet-container">
+
+  <!-- HEADER -->
+  <div class="cabinet-header" *ngIf="user$ | async as user">
+    <h1>Cabinet Personal – {{ user.username }}</h1>
+    <p>Email: <strong>{{ user.email }}</strong></p>
+  </div>
+
+  <!-- GRID PRINCIPAL -->
+  <div class="dashboard-grid">
+
+    <!-- Col 1 - Statistici cont + Spațiu -->
+    <div class="card">
+
+      <h2>Statistici cont</h2>
+
+      <!-- INFO DASHBOARD -->
+      <ng-container *ngIf="dashboardInfo$ | async as info">
+        <p><strong>Fișiere criptate:</strong> {{ info.encryptedFiles }}</p>
+        <p><strong>Fișiere partajate de utilizator:</strong> {{ info.sharedByMe }}</p>
+        <p><strong>Fișiere partajate cu utilizator:</strong> {{ info.sharedWithMe }}</p>
+        <p><strong>Fișiere partajate prin link:</strong> {{ info.sharedLinks }}</p>
+      </ng-container>
+
+      <!-- RESERVATIONS / STORAGE -->
+      <ng-container *ngIf="reservations$ | async as reservations">
+        <div *ngFor="let reservation of reservations">
+
+          <p><strong>Spațiu total:</strong> {{ reservation.totalSize /1000 }} Gb</p>
+          <p><strong>Utilizat:</strong> {{ reservation.usedSize / 1000}} Gb</p>
+
+          <!-- Progress bar -->
+          <div class="progress-bar">
+            <div
+              class="progress"
+              [style.width.%]="(reservation.usedSize / reservation.totalSize) * 100">
+            </div>
+          </div>
+
+        </div>
+      </ng-container>
+
+    </div>
+
+    <!-- Col 2 - Securitatea contului -->
+    <div class="card">
+      <h2>Securitatea contului</h2>
+      <ul>
+        <li><button class="link-btn">Schimbă parola</button></li>
+        <li><button class="link-btn">Activează 2FA</button></li>
+        <li><button class="link-btn">Vezi log activitate</button></li>
+        <li>
+          <!-- Buton pentru adăugare dispozitiv -->
+          <button class="link-btn" (click)="toggleAddDevice()">
+            Adaugă dispozitiv
+          </button>
+        </li>
+      </ul>
+
+      <!-- Câmp pentru codul de pairing -->
+      <div *ngIf="showAddDevice" class="add-device-container">
+        <label for="pairingCode">Introduceți codul dispozitivului:</label>
+        <input
+          id="pairingCode"
+          type="text"
+          [(ngModel)]="pairingCode"
+          placeholder="XXXX-XXXX"
+          class="form-input"
+        />
+        <button class="link-btn" (click)="submitPairingCode()">
+          Confirmă
+        </button>
+        <button class="link-btn cancel-btn" (click)="cancelAddDevice()">
+          Anulează
+        </button>
+      </div>
+    </div>
+
+
+    <!-- Col 3 - Fișiere -->
+    <div class="card">
+      <h2>Fișiere</h2>
+      <ul>
+        <li><button class="link-btn">Încărcate recent</button></li>
+        <li><button class="link-btn">Fișiere criptate</button></li>
+        <li><button class="link-btn">Link-uri active</button></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- CERERE SPAȚIU SUPLIMENTAR -->
+  <div class="card request-card">
+    <div>
+      <h2>Cerere Spațiu Suplimentar</h2>
+
+      <div class="custom-select">
+        <label for="sizes">Alege memoria necesară:</label>
+        <select id="sizes" [(ngModel)]="selectedSize">
+          <option [ngValue]="5000">5 Gb</option>
+          <option [ngValue]="10000">10 Gb</option>
+          <option [ngValue]="15000">15 Gb</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="request-btn" (click)="demandSize()">
+      Cere Spațiu
+    </button>
+  </div>
+
+</div>

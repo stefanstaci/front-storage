@@ -1,0 +1,44 @@
+<form [formGroup]="shareForm" class="share-form">
+
+  <p class="filename">
+    📄 {{ filename }}
+  </p>
+
+  <label>Email utilizator</label>
+  <input
+    type="text"
+    formControlName="email"
+    placeholder="Introdu emailul..."
+    autocomplete="off"
+    class="email-input"
+  />
+<div>
+  <!-- Dropdown autocomplete -->
+  <ul *ngIf="(emails$ | async) as emails" class="dropdown-list">
+    <li *ngFor="let email of emails" (click)="selectEmail(email)">
+      {{ email }}
+    </li>
+  </ul>
+</div>
+  <!-- Select permisiune -->
+  <label>Drepturi acces</label>
+  <select formControlName="permission" class="permission-select">
+    <option *ngFor="let perm of permissions" [value]="perm">{{ perm }}</option>
+  </select>
+
+  <!-- Buttons -->
+  <div class="actions">
+    <button type="button" (click)="sendLink()" [disabled]="loading">
+      🔗 Trimite link
+    </button>
+
+    <button type="button" (click)="grantAccess()" [disabled]="loading">
+      👤 Permite acces
+    </button>
+  </div>
+
+  <!-- Mesaje -->
+  <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>
+  <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+</form>

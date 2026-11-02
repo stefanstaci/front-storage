@@ -1,0 +1,134 @@
+<div class="login-wrapper">
+  <div class="login-card">
+
+    <h2 class="login-title">Înregistrare</h2>
+    <p class="login-subtitle">Completați datele pentru a vă crea un cont.</p>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="submitRegistration()">
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          class="form-input"
+          placeholder="Introduceți email"
+        />
+        <p *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched"
+           class="error-message">
+          Email is required
+        </p>
+      </div>
+
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">User Name</label>
+        <input
+          formControlName="username"
+          type="text"
+          id="username"
+          class="form-input"
+          placeholder="Introduceți username"
+        />
+        <p *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched"
+           class="error-message">
+          Username is required
+        </p>
+      </div>
+
+      <!-- First Name -->
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input
+          formControlName="firstName"
+          type="text"
+          id="firstName"
+          class="form-input"
+          placeholder="Introduceți prenumele"
+        />
+        <p *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched"
+           class="error-message">
+          First Name is required
+        </p>
+      </div>
+
+      <!-- Last Name -->
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input
+          formControlName="lastName"
+          type="text"
+          id="lastName"
+          class="form-input"
+          placeholder="Introduceți numele"
+        />
+        <p *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched"
+           class="error-message">
+          Last Name is required
+        </p>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          class="form-input"
+          placeholder="Introduceți parola"
+        />
+        <p *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched"
+           class="error-message">
+          Password is required
+        </p>
+        <p
+          *ngIf="registrationForm.get('password')?.hasError('strongPassword') &&
+         registrationForm.get('password')?.touched"
+          class="error-message">
+          Parola trebuie să aibă minim 12 caractere, o literă mare, o cifră și un caracter special.
+        </p>
+      </div>
+
+      <!-- Rewrite Password -->
+      <div class="form-group">
+        <label for="checkPassword">Rewrite Password</label>
+        <input
+          formControlName="checkPassword"
+          type="password"
+          id="checkPassword"
+          class="form-input"
+          placeholder="Reintroduceți parola"
+        />
+        <p *ngIf="registrationForm.get('checkPassword')?.invalid && registrationForm.get('checkPassword')?.touched"
+           class="error-message">
+          Password is required
+        </p>
+
+        <p
+          *ngIf="registrationForm.get('password')?.value !== registrationForm.get('checkPassword')?.value &&
+                 registrationForm.get('checkPassword')?.touched"
+          class="error-message">
+          The passwords must match
+        </p>
+      </div>
+
+      <!-- Button -->
+      <button
+        [disabled]="registrationForm.invalid || registrationForm.disabled"
+        class="form-button"
+        type="submit">
+        Create Account
+      </button>
+
+    </form>
+
+    <p class="signup-text">
+      Already have an account?
+      <a routerLink="../login" class="signup-link">Sign In</a>
+    </p>
+
+  </div>
+</div>

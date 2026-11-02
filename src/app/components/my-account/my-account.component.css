@@ -1,0 +1,135 @@
+.cabinet-container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.cabinet-header {
+  background: #e8eef7;
+  padding: 18px 22px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 35px;
+}
+
+.card {
+  background: white;
+  padding: 18px 22px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.card h2 {
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+
+.progress-bar {
+  width: 100%;
+  background: #e1e1e1;
+  height: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.progress {
+  height: 100%;
+  background: #3a7afe;
+  border-radius: 8px;
+  transition: width 0.4s ease;
+}
+
+.link-btn {
+  border: none;
+  background: none;
+  color: #3a7afe;
+  cursor: pointer;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+.request-card {
+  margin-top: 30px;
+  text-align: left;
+  border-left: 4px solid #3a7afe20;
+  padding-left: 16px;
+}
+
+.request-btn {
+  margin-top: 12px;
+  padding: 10px 22px;
+  background: #3a7afe;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.07s ease;
+}
+
+.request-btn:hover {
+  background: #315fe0;
+}
+
+.request-btn:active {
+  transform: scale(0.97);
+}
+
+
+
+.custom-select {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.custom-select select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d1d1;
+  background: #fafafa;
+  font-size: 15px;
+  transition: border 0.2s ease;
+}
+
+.custom-select select:focus {
+  border-color: #3a7afe;
+  outline: none;
+  background: white;
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 16px 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cabinet-container {
+    padding: 10px;
+  }
+
+  .cabinet-header h1 {
+    font-size: 22px;
+  }
+
+  .request-btn {
+    width: 100%;
+  }
+}

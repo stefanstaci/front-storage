@@ -1,0 +1,94 @@
+<navbar></navbar>
+
+<div
+  *ngIf="{ reservations: reservations$ | async, users: users$ | async } as data"
+  class="admin-container">
+
+  <!-- ADMIN HEADER -->
+  <div class="admin-header">
+    <h1>Admin Dashboard</h1>
+    <p>Gestionarea utilizatorilor și resurselor de stocare</p>
+  </div>
+
+  <!-- ADMIN QUICK STATS -->
+  <div class="admin-stats">
+    <div class="stat-card">
+      <h3>Total Utilizatori</h3>
+      <p>{{ data.users?.length }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Total Spațiu Alocat</h3>
+      <p>
+        {{ totalAllocatedSpace }} Gb
+      </p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Spațiu Utilizat</h3>
+      <p>
+        {{ totalUsedSpace }} Gb
+      </p>
+    </div>
+  </div>
+
+  <!-- USERS TABLE -->
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+      <tr>
+        <th>User</th>
+        <th>Email</th>
+        <th>Memorie</th>
+        <th>Utilizare</th>
+        <th>Acțiuni</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <ng-container *ngFor="let user of data.users">
+        <ng-container *ngFor="let reservation of data.reservations">
+
+          <tr *ngIf="reservation.userId === user.id">
+
+            <td>
+              <strong>{{ user.username }}</strong>
+            </td>
+
+            <td>{{ user.email }}</td>
+
+            <td>
+              <span class="badge badge-blue">{{ reservation.totalSize }} Gb</span>
+            </td>
+
+            <td>
+              <div class="usage-cell">
+                <span class="usage-text">{{ reservation.usedSize }} / {{ reservation.totalSize }} Gb</span>
+
+                <div class="usage-bar">
+                  <div
+                    class="usage-progress"
+                    [style.width.%]="(reservation.usedSize / reservation.totalSize) * 100">
+                  </div>
+                </div>
+              </div>
+            </td>
+
+            <td class="actions">
+              <button class="action-btn small warning" (click)="deleteUser(user.id)">Delete</button>
+              <button class="action-btn small blue" (click)="activateSize(user.id)">Activate Size</button>
+              <button class="action-btn small gray">Logs</button>
+              <button class="action-btn small gray">Reset Password</button>
+            </td>
+
+          </tr>
+
+        </ng-container>
+      </ng-container>
+
+      </tbody>
+    </table>
+  </div>
+
+</div>
