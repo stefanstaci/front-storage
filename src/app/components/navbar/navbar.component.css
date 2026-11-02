@@ -1,0 +1,118 @@
+.navbar {
+  width: 100%;
+  height: 64px;
+  background: #d2dffd;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+/* --- Right side --- */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Links */
+.nav-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  transition: 0.2s;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.nav-link:hover {
+  background: #f0f0f0;
+}
+
+.admin-link {
+  color: #d9534f;
+}
+
+.admin-link:hover {
+  background: #fceaea;
+}
+
+/* Avatar */
+.avatar {
+  width: 36px;
+  height: 36px;
+  background: #007bff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.2s;
+}
+
+.avatar:hover {
+  opacity: 0.85;
+}
+.avatar-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+/* Dropdown menu */
+.dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 180px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  padding: 8px 0;
+  animation: fadeIn 0.15s ease-in-out;
+  z-index: 10;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 16px;
+  font-size: 15px;
+  color: #333;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #f0f2f7;
+}
+
+.logout {
+  color: #d9534f;
+}
+
+.logout:hover {
+  background: #faeaea;
+}
+
+/* Tiny fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

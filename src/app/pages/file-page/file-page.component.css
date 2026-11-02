@@ -1,3 +1,4 @@
+/* ---------------- BASIC FILE STYLES ---------------- */
 .file {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -10,6 +11,7 @@
   width: 100%;
   height: 100%;
 }
+
 .actor-image {
   height: 200px;
   width: 150px;
@@ -26,29 +28,28 @@
   text-align: center;
 }
 
+/* ---------------- GRID FIX ---------------- */
 .container {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)); /* Modificat la 3 coloane */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
   width: 100%;
+  overflow: visible; /* 🔥 IMPORTANT */
+}
+
+.grid-container {
+  overflow: visible; /* 🔥 IMPORTANT */
 }
 
 .file-item {
   text-align: center;
 }
 
+/* ---------------- IMAGE ---------------- */
 .movie-image {
   width: 100%;
   height: auto;
   border-radius: 5px;
-}
-
-.concrete-movie {
-  margin-bottom: 0.1rem;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  padding-left: 20%;
-  align-items: center;
 }
 
 .link {
@@ -63,6 +64,7 @@
   transition: transform 1s;
 }
 
+/* ---------------- SEARCH ---------------- */
 .search-bar {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -70,8 +72,10 @@
   width: 50%;
   margin-left: 25%;
   margin-right: 25%;
+  margin-top: 15px;
 }
 
+/* ---------------- TITLES ---------------- */
 .title {
   margin-bottom: 0.5rem;
   margin-top: 2rem;
@@ -85,26 +89,53 @@
   transform: scale(1.05);
 }
 
-.button {
-  padding: 0.5rem 1rem;
-  background-color: #ADD8E6;
-  border-radius: 0.25rem;
-  border-width: 1px;
+/* ---------------- ADD BUTTON ---------------- */
+.button-add {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background-color: #1A73E8;
+  color: white;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  transition: 0.2s ease;
+  z-index: 2000;
 }
 
+.button-add:hover {
+  background-color: #1765cc;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.30);
+  transform: translateY(-2px);
+}
+
+.button-add:active {
+  transform: scale(0.95);
+}
+
+/* ---------------- NAVBAR ---------------- */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  height: 50px; /* Înălțimea redusă a barei de navigare */
+  height: 50px;
   padding: 10px 20px;
-  background-color: #ADD8E6; /* culoarea de fundal a meniului de navigare */
-  color: black; /* culoarea textului */
+  background-color: #ADD8E6;
+  color: black;
 }
 
 .navbar-left {
-  flex: 1; /* face ca elementul să ocupe spațiul disponibil în stânga */
+  flex: 1;
 }
 
 .navbar-right {
@@ -122,11 +153,125 @@
 }
 
 .personal-cabinet {
-  margin-left: 20px; /* spațiere între "cabinet personal" și celelalte elemente */
-  color: black; /* culoarea textului pentru link */
-  text-decoration: none; /* eliminarea sublinierii link-ului */
+  margin-left: 20px;
+  color: black;
+  text-decoration: none;
 }
 
 .personal-cabinet:hover {
-  text-decoration: underline; /* sublinierea link-ului la hover */
+  text-decoration: underline;
+}
+
+/* ---------------- FILE CARD ---------------- */
+.file-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px 15px 15px 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: relative;      /* 🔥 REQUIRED */
+  z-index: 1;              /* 🔥 REQUIRED */
+  transition: transform .2s ease, box-shadow .2s ease;
+  cursor: pointer;
+}
+
+.file-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* CÂND DROPDOWN E DESCHIS */
+.file-card.active {
+  z-index: 10; /* 🔥 CARDUL ACTIV TRECE DEASUPRA */
+}
+
+/* ---------------- FILE IMAGE ---------------- */
+.file-image-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.file-image {
+  width: 110px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ---------------- FILE NAME ---------------- */
+.file-name {
+  text-align: center;
+  font-size: 15px;
+  margin: 10px 0;
+  color: #333;
+  font-weight: 600;
+}
+
+/* ---------------- MORE BUTTON ---------------- */
+.more-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #efefef;
+  border: none;
+  padding: 6px 10px;
+  font-size: 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .2s;
+  z-index: 2;
+}
+
+.more-btn:hover {
+  background: #dcdcdc;
+}
+
+/* ---------------- DROPDOWN ---------------- */
+.dropdown {
+  position: absolute;
+  top: 45px;
+  right: 10px;
+  width: 180px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  overflow: hidden;
+  animation: fadeIn .2s ease;
+  z-index: 9999; /* 🔥 MAX PRIORITY */
+}
+
+.dropdown button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background .2s;
+}
+
+.dropdown button:hover {
+  background: #f5f5f5;
+}
+
+.dropdown .danger {
+  color: #c62828;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------- SHARED ---------------- */
+.file-card.shared {
+  border: 2px dashed #3f51b5;
+  background-color: #f4f7ff;
+}
+
+.shared-badge {
+  font-size: 12px;
+  color: #3f51b5;
 }

@@ -16,9 +16,12 @@ export class AuthService {
       .pipe(
         tap((response: any) => {
           this.setToken(response.token);
-          localStorage.setItem('token', response.token);
+         localStorage.setItem('token', response.token);
         })
       );
+  }
+  registration(email: string, login: string, password: string, firstName: string, lastName: string): Observable<any> {
+    return this.http.post<any>('http://localhost:7080/api/auth/registration', { email, login, password, firstName, lastName });
   }
 
   logout(): Observable<any> {
@@ -55,5 +58,9 @@ export class AuthService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.post<T>(url, body, { headers });
+  }
+
+  verifyOtp(username: string, otp: string): Observable<void> {
+    return this.http.post<void>('http://localhost:7080/api/auth/verify-otp', { username, otp });
   }
 }

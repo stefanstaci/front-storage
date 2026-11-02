@@ -1,0 +1,37 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <h1 class="title">{{ title }}</h1>
+  </div>
+
+  <div class="navbar-right">
+
+    <!-- Admin -->
+    <ng-container *ngIf="user$ | async as user">
+      <a *ngIf="user.roleEnum === 'ADMIN'"
+         routerLink="/admin"
+         class="nav-link admin-link">
+        Admin
+      </a>
+    </ng-container>
+
+    <!-- Avatar + Dropdown -->
+    <div class="avatar-wrapper" (click)="toggleDropdown()">
+      <div class="avatar">
+        {{ (user$ | async)?.username?.[0]?.toUpperCase() }}
+      </div>
+
+      <div class="dropdown" *ngIf="dropdownOpen">
+        <a
+          [routerLink]="isMyAccount() ? '/file' : '/my-account'"
+          class="dropdown-item">
+          {{ isMyAccount() ? 'Pagina principală' : 'Cabinet personal' }}
+        </a>
+
+        <a (click)="logout()" class="dropdown-item logout">
+          Logout
+        </a>
+      </div>
+    </div>
+
+  </div>
+</nav>

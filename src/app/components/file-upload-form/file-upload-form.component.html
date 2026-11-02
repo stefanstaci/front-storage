@@ -1,4 +1,7 @@
 <form (ngSubmit)="onSubmit()">
   <input type="file" (change)="onFileSelected($event)" name="file"><br><br>
   <button class="button" type="submit">Upload</button>
+  <p class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </p>
 </form>

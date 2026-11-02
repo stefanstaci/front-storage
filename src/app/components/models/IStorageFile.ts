@@ -1,9 +1,11 @@
 export interface IStorageFiles {
-  id?: number,
+  id: number,
   name: string,
   filename: string,
   size: number,
   mimeType: string,
   path: string,
-  userId?: number
+  userId?: number,
+  shared?: boolean;
+  permission?: 'READ' | 'EDIT';
 }

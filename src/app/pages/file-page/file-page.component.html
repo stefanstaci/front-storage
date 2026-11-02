@@ -1,15 +1,6 @@
 <app-global-error></app-global-error>
 
-<div>
-  <nav class="navbar">
-    <div class="navbar-left">
-      <h1 class="title">{{ title }}</h1>
-    </div>
-    <div class="navbar-right">
-      <a href="#" class="personal-cabinet">Cabinet Personal</a>
-    </div>
-  </nav>
-</div>
+<navbar></navbar>
 
 <div>
   <p *ngIf="loading" [ngStyle]="{textAlign: 'center'}">loading...</p>
@@ -19,19 +10,66 @@
     class="search-bar"
     placeholder="Search file..."
     [(ngModel)]="term"
-  >
+    (ngModelChange)="updateTerm($event)"  >
 </div>
 
-<div *ngIf="files$ | async as files" class="file">
+<div *ngIf="filteredFiles$ | async as files" class="grid-container">
   <div class="container">
-    <div *ngFor="let storageFile of files">
-      <div class="actor-container">
-        <a [routerLink]="['/', storageFile.filename]" class="link">
-          <img *ngIf="isImage(storageFile.filename)" [src]="getImageUrl(storageFile.filename)" alt="File Image" class="actor-image">
+    <div class="file-card" *ngFor="let storageFile of files; let i = index;" [class.active]="selectedIndex === i">
+      <div class="file-image-wrapper">
+        <a [routerLink]="['/', storageFile.filename]">
+          <img *ngIf="isImage(storageFile.filename)" [src]="getImageUrl(storageFile.filename)" alt="File Image" class="file-image">
         </a>
-        <button (click)="deleteFile(storageFile.filename)" class="delete-button">-</button>
       </div>
-      <h3 class="concrete-movie">{{storageFile.filename}}</h3>
+      <h3 class="file-name">{{storageFile.filename}}</h3>
+
+      <span *ngIf="storageFile.shared" class="shared-badge">
+        🔗 Shared ({{ storageFile.permission }})
+      </span>
+
+      <div class="actions">
+      <button (click)="toggleOptions(i)" class="more-btn">...</button>
+
+        <div *ngIf="selectedIndex === i" class="dropdown">
+
+          <button *ngIf="canEdit(storageFile)"
+                  (click)="editFile(storageFile.filename)">
+            ✏️ Modifică fișier
+          </button>
+
+          <button *ngIf="canShare(storageFile)"
+                  (click)="shareFile(storageFile.filename)">
+            🔗 Partajează fișier
+          </button>
+
+          <button *ngIf="canDownload(storageFile)"
+                  (click)="downloadFile(storageFile.filename)">
+            ⬇️ Descarcă fișier
+          </button>
+
+          <button *ngIf="canEncrypt(storageFile)"
+                  (click)="encryptFile(storageFile.filename)">
+            🔒 Criptează fișier
+          </button>
+
+          <button *ngIf="canEncrypt(storageFile)"
+                  (click)="decryptFile(storageFile.filename)">
+            🔓 Decriptează fișier
+          </button>
+
+          <button (click)="downloadFile(storageFile.filename)">
+            ℹ️ Detalii fișier
+          </button>
+
+          <button *ngIf="canDelete(storageFile)"
+                  class="danger"
+                  (click)="deleteFile(storageFile.filename)">
+            🗑️ Șterge fișier
+          </button>
+
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
@@ -40,7 +78,20 @@
   <app-modal *ngIf="(modalService.isVisible$ | async) && (modalType === 'add-file')" title="Add File">
     <app-file-upload-form></app-file-upload-form>
   </app-modal>
-  <button (click)="openModal('add-file')" class="button">add file</button>
+  <button (click)="openModal('add-file')" class="button-add">+</button>
 </div>
 
+<app-modal *ngIf="(modalService.isVisible$ | async) && modalType === 'edit-file'"
+           title="Edit File">
+  <app-file-edit [filename]="selectedFileForEdit!"></app-file-edit>
+</app-modal>
 
+<app-modal
+  *ngIf="(modalService.isVisible$ | async) && modalType === 'share-file'"
+  title="Partajează fișier">
+
+  <app-file-share
+    [filename]="selectedFileForShare!">
+  </app-file-share>
+
+</app-modal>

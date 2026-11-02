@@ -5,11 +5,12 @@ import { routes } from './app.routes';
 import {HTTP_INTERCEPTORS, provideHttpClient} from "@angular/common/http";
 import {provideClientHydration} from "@angular/platform-browser";
 import {TokenInterceptor} from "./classes/TokenInterceptor";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration(), provideHttpClient(), {
     provide: HTTP_INTERCEPTORS,
     multi: true,
     useClass: TokenInterceptor
-  }]
+  }, provideAnimationsAsync()]
 };
